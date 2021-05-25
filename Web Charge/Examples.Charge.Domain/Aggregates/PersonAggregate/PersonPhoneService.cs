@@ -13,6 +13,24 @@ namespace Examples.Charge.Domain.Aggregates.PersonAggregate
             _personPhoneRepository = personPhoneRepository;
         }
 
-        public async Task<List<PersonPhone>> FindAllAsync() => (await _personPhoneRepository.FindAllAsync()).ToList();
+        public void DeletePersonPhone(int personPhoneId)
+        {
+            _personPhoneRepository.Delete(personPhoneId);
+        }
+
+        public void EditPersonPhone(PersonPhone personPhone)
+        {
+            _personPhoneRepository.Edit(personPhone);
+        }
+
+        public PersonPhone GetPersonPhone(int personPhoneId)
+        {
+            return _personPhoneRepository.Get(personPhoneId);
+        }
+
+        public void InsertPersonPhone(PersonPhone personPhone)
+        {
+            _personPhoneRepository.Insert(personPhone);
+        }
     }
 }
