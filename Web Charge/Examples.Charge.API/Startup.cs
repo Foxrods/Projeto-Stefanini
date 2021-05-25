@@ -26,6 +26,7 @@ namespace Examples.Charge.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            Console.WriteLine(Configuration.GetConnectionString("DefaultConnection"));
             services.AddDbContext<ExampleContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));

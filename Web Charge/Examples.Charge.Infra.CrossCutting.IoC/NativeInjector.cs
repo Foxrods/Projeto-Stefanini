@@ -23,6 +23,9 @@ namespace Examples.Charge.Infra.CrossCutting.IoC
         private static void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<ExampleDto>();
+            services.AddTransient<PersonDto>();
+            services.AddTransient<PersonPhoneDTO>();
+            services.AddTransient<PhoneNumberTypeDTO>();
 
             services.AddScoped<IExampleFacade, ExampleFacade>();
             services.AddScoped<IExampleService, ExampleService>();
@@ -32,6 +35,7 @@ namespace Examples.Charge.Infra.CrossCutting.IoC
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IPersonRepository, PersonRepository>();
 
+            services.AddScoped<IPersonPhoneFacade, PersonPhoneFacade>();
             services.AddScoped<IPersonPhoneService, PersonPhoneService>();
             services.AddScoped<IPersonPhoneRepository, PersonPhoneRepository>();
             

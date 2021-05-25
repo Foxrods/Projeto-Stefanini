@@ -23,7 +23,14 @@ namespace Examples.Charge.Domain.Aggregates.PersonAggregate
         public List<PersonPhone> GetPersonPhones(int personId)
         {
             Person person = _personRepository.GetPerson(personId);
-            return person.Phones.ToList();
+            if(person.Phones != null)
+            {
+                return person.Phones.ToList();
+            }
+            else
+            {
+                return new List<PersonPhone>();
+            }
         }
 
     }
