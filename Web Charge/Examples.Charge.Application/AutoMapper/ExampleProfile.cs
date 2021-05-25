@@ -14,10 +14,11 @@ namespace Examples.Charge.Application.AutoMapper
                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome));
 
-			CreateMap<Person, PersonDto>();
-			CreateMap<PersonDto, Person>();
-            CreateMap<PersonPhone, PersonPhoneDTO>();
-            CreateMap<PersonPhoneDTO, PersonPhone>();
+			CreateMap<Person, PersonDto>().MaxDepth(1);
+			CreateMap<PersonDto, Person>().MaxDepth(1);
+            CreateMap<PersonPhone, PersonPhoneDTO>().MaxDepth(1)
+                .ForMember(dest => dest.Person, opt => opt.Ignore());
+            CreateMap<PersonPhoneDTO, PersonPhone>().MaxDepth(1);
             CreateMap<PhoneNumberType, PhoneNumberTypeDTO>();
             CreateMap<PhoneNumberTypeDTO, PhoneNumberType>();
         }

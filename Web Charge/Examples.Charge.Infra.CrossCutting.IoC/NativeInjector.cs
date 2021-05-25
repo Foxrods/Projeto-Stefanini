@@ -49,6 +49,7 @@ namespace Examples.Charge.Infra.CrossCutting.IoC
             {
                 configuration.AddProfile<ExampleProfile>();
             }).CompileMappings();
+
         }
     }
 }
