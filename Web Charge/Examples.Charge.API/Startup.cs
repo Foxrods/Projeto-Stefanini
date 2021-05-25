@@ -16,6 +16,7 @@ namespace Examples.Charge.API
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,6 +27,18 @@ namespace Examples.Charge.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
+                });
+            });
+
             Console.WriteLine(Configuration.GetConnectionString("DefaultConnection"));
             services.AddDbContext<ExampleContext>(options =>
             {
@@ -73,6 +86,7 @@ namespace Examples.Charge.API
             }
 
             app.UseSwagger();
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseSwaggerUI(options =>
             {
