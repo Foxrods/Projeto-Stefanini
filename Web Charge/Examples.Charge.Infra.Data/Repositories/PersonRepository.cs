@@ -20,12 +20,13 @@ namespace Examples.Charge.Infra.Data.Repositories
 
         public async Task<IEnumerable<Person>> FindAllAsync() => await Task.Run(() => _context.Person);
 
-        public IEnumerable<Person> GetAllPersons() => _context.Person.AsQueryable().Include(x => x.Phones);
+        public IEnumerable<Person> GetAllPersons() => _context.Person.AsQueryable().Include(x => x.Phones).ThenInclude(x => x.PhoneNumberType);
 
         public Person GetPerson(int id)
         {
             return _context.Person.AsQueryable()
                 .Include(x => x.Phones)
+                .ThenInclude(x => x.PhoneNumberType)
                 .Where(x => x.BusinessEntityID == id)
                 .FirstOrDefault();
         }
