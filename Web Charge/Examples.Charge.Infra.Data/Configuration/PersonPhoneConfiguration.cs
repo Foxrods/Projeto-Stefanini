@@ -12,7 +12,7 @@ namespace Examples.Charge.Infra.Data.Configuration
 
             builder.ToTable("PersonPhone", "dbo").HasKey(t => new { t.BusinessEntityID, t.PhoneNumber, t.PhoneNumberTypeID});
 
-            builder.Property(t => t.BusinessEntityID).HasColumnName("BusinessEntityID").IsRequired(true);
+            builder.Property(t => t.BusinessEntityID).HasColumnName("BusinessEntityID").IsRequired(true).ValueGeneratedOnAdd();
             builder.Property(t => t.PhoneNumberTypeID).HasColumnName("PhoneNumberTypeID").IsRequired(true);
             builder.Property(t => t.PhoneNumber).HasColumnName("PhoneNumber").IsRequired(true);
 

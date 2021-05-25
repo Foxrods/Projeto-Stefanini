@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Examples.Charge.Infra.Data.Configuration.Migrations
 {
     [DbContext(typeof(ExampleContext))]
-    [Migration("20210525161653_PersonID")]
-    partial class PersonID
+    [Migration("20210525173436_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -77,7 +77,9 @@ namespace Examples.Charge.Infra.Data.Configuration.Migrations
             modelBuilder.Entity("Examples.Charge.Domain.Aggregates.PersonAggregate.PersonPhone", b =>
                 {
                     b.Property<int>("BusinessEntityID")
-                        .HasColumnName("BusinessEntityID");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("BusinessEntityID")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnName("PhoneNumber");
