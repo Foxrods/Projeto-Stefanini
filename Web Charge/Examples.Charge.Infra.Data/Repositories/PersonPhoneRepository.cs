@@ -3,6 +3,7 @@ using Examples.Charge.Domain.Aggregates.PersonAggregate.Interfaces;
 using Examples.Charge.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Examples.Charge.Infra.Data.Repositories
@@ -18,13 +19,22 @@ namespace Examples.Charge.Infra.Data.Repositories
 
         public void Delete(int id)
         {
-            var personPhone = _context.PersonPhone.Find(id);
+            var personPhone = _context.PersonPhone.AsQueryable().Where(x => x.BusinessEntityID == id).FirstOrDefault();
             _context.PersonPhone.Remove(personPhone);
             _context.SaveChanges();
         }
         public void Edit(PersonPhone personPhone)
         {
-            _context.PersonPhone.Update(personPhone);
+            //como não é possivel editar os valores de chaves, 
+            //a edição será feita na base de uma nova inserção com a exclusão da antiga
+            var personPhoneObj = _context.PersonPhone.AsQueryable()
+                .Where(x => x.BusinessEntityID == personPhone.BusinessEntityID)
+                .FirstOrDefault();
+            _context.PersonPhone.Remove(personPhoneObj);
+            _context.SaveChanges();
+
+            personPhone.BusinessEntityID = 0;
+            _context.PersonPhone.Add(personPhone);
             _context.SaveChanges();
         }
 

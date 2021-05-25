@@ -40,6 +40,7 @@ namespace Examples.Charge.Application.Facade
         {
             var personPhoneDto = new PersonPhoneDTO
             {
+                BusinessEntityID = request.BusinessEntityID,
                 PhoneNumber = request.PhoneNumber,
                 PersonID = request.PersonId,
                 Person = request.Person,
