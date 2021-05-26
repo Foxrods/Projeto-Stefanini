@@ -17,6 +17,8 @@ namespace Examples.Charge.Infra.Data.Configuration
             builder.HasMany(t => t.Phones).WithOne(t => t.Person);
 
             builder.HasData(new Person { BusinessEntityID = 1, Name = "User One" });
+            builder.HasData(new Person { BusinessEntityID = 2, Name = "Ken Masters" });
+            builder.HasData(new Person { BusinessEntityID = 3, Name = "Laura Matsuda" });
         }
     }
 }
