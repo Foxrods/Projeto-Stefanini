@@ -5,6 +5,10 @@ services:
     build:
       context: .
       dockerfile: Web Charge/Examples.Charge.API/Dockerfile
+    environment: 
+      - ASPNETCORE_ENVIRONMENT=Sandbox
+    ports:
+      - 5010:80
     depends_on:
       - db
   db:
